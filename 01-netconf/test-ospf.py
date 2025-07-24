@@ -73,7 +73,7 @@ with manager.connect(host='10.3.11.1',
                     <interface>GigabitEthernet1.414</interface>
                   </passive-interface>
                 </process-id>
-                #'''
+                '''
 
                 assert expected_output.replace(" ", "").replace("\n","") in out.replace(" ", "").replace("\n","") 
 
