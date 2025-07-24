@@ -67,7 +67,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                ansible-playbook -i inventory configure.yaml
+                ansible-playbook -i inventory 03-ansible/configure.yaml
                 '''
             }
         }
@@ -75,7 +75,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                ansible-playbook -i inventory test.yaml
+                ansible-playbook -i inventory 03-ansible/test.yaml
                 '''
             }
         }
