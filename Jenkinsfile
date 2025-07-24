@@ -12,5 +12,25 @@ pipeline {
                 }
             }
         }
+        stage('Configure OSPF') {
+            steps {
+                script {
+                    sh '''
+                    . venv/bin/activate
+                    python 01-netconf/configure-ospf.py
+                    '''
+                }
+            }
+        }
+        stage('Test OSPF') {
+            steps {
+                script {
+                    sh '''
+                    . venv/bin/activate
+                    python 01-netconf/test-ospf.py
+                    '''
+                }
+            }
+        }
     }
 }
