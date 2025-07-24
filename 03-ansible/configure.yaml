@@ -1,0 +1,25 @@
+---
+- name: configure BGP
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    #- name: Print host variables
+    #  debug:
+    #    var: hostvars[inventory_hostname]
+
+    - name: router BGP
+      cisco.ios.ios_bgp_global:
+        config:
+          as_number: 65003
+          bgp:
+            default:
+              ipv4_unicast: true
+          neighbor:
+            - address: 100.4.30.1
+              remote_as: 10000
+
+    - name: save config if modified
+      cisco.ios.ios_config:
+        diff_against: startup
+        save_when: modified

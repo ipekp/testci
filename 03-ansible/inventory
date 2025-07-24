@@ -1,0 +1,9 @@
+all:
+  hosts:
+    R30:
+      ansible_host: 10.3.11.1
+      ansible_network_os: ios
+      ansible_connection: ansible.netcommon.network_cli
+      ansible_user: admin
+      ansible_password: admin
+      ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"

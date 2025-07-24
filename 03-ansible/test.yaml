@@ -1,0 +1,35 @@
+---
+- name: test BGP
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    #- name: Print host variables
+    #  debug:
+    #    var: hostvars[inventory_hostname]
+
+    #- name: show ip bgp sum
+    #  cisco.ios.ios_command:
+    #    commands: 
+    #      - show ip bgp sum
+    #    wait_for:
+    #      - result[0] contains 100.4.30.2
+    
+    - name: sh ip bgp sum
+      ios_command:
+        commands:
+          - sh ip bgp sum
+      register: cli_output
+      no_log: true
+
+    - name: whats cli output
+      debug:
+        var: cli_output
+
+    - name: Assert ping R1 results
+      assert:
+        that:
+          - "'32' in item"
+        fail_msg: "[KO] - Not 32 prefix from BGP"
+      loop: "{{ cli_output.stdout }}"
+      no_log: true

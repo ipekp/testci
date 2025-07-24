@@ -63,5 +63,15 @@ pipeline {
                 }
             }
         }
+        stage('Ansible: configure BGP') {
+            steps {
+                sh "ansible-playbook -i inventory configure.yaml"
+            }
+        }
+        stage('Ansible: test BGP') {
+            steps {
+                sh "ansible-playbook -i inventory test.yaml"
+            }
+        }
     }
 }

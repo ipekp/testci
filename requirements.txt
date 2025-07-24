@@ -1,3 +1,6 @@
 ncclient
 lxml
 requests
+ansible
+ansible-pylibssh
+paramiko
