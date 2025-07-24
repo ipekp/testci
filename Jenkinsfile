@@ -12,7 +12,7 @@ pipeline {
                 }
             }
         }
-        stage('Configure OSPF') {
+        stage('NETCONF: Configure OSPF') {
             steps {
                 script {
                     sh '''
@@ -22,12 +22,43 @@ pipeline {
                 }
             }
         }
-        stage('Test OSPF') {
+        stage('NETCONF: Test OSPF') {
             steps {
                 script {
                     sh '''
                     . venv/bin/activate
                     python 01-netconf/test-ospf.py
+                    '''
+                }
+            }
+        }
+
+        stage('RESTCONF: Init') {
+            steps {
+                script {
+                    sh '''
+                    . venv/bin/activate
+                    python 02-restconf/init-ospf.py
+                    '''
+                }
+            }
+        }
+        stage('RESTCONF: Configure OSPF') {
+            steps {
+                script {
+                    sh '''
+                    . venv/bin/activate
+                    python 02-restconf/configure-ospf.py
+                    '''
+                }
+            }
+        }
+        stage('RESTCONF: Test OSPF') {
+            steps {
+                script {
+                    sh '''
+                    . venv/bin/activate
+                    python 02-restconf/test-ospf.py
                     '''
                 }
             }
